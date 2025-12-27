@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, Loader, ArrowRight, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE } from '../config';
 
 export default function CreatePortfolio({ user }) {
     const navigate = useNavigate();
@@ -131,7 +132,7 @@ export default function CreatePortfolio({ user }) {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                'http://localhost:5000/api/ai/improve-content',
+                `${API_BASE}/api/ai/improve-content`,
                 { field, content },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -170,7 +171,7 @@ export default function CreatePortfolio({ user }) {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                'http://localhost:5000/api/portfolio/create',
+                `${API_BASE}/api/portfolio/create`,
                 formData,
                 { headers: { Authorization: `Bearer ${token}` } }
             );

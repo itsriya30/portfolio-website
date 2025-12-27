@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Download, Share2, Rocket, Loader, FileText } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE } from '../config';
 
 export default function Preview({ user }) {
     const { id } = useParams();
@@ -19,7 +20,7 @@ export default function Preview({ user }) {
     const fetchPortfolio = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`http://localhost:5000/api/portfolio/${id}`, {
+            const response = await axios.get(`${API_BASE}/api/portfolio/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPortfolio(response.data);
@@ -49,7 +50,7 @@ export default function Preview({ user }) {
     const handleDownloadResume = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`http://localhost:5000/api/portfolio/${id}/resume`, {
+            const response = await axios.get(`${API_BASE}/api/portfolio/${id}/resume`, {
                 headers: { Authorization: `Bearer ${token}` },
                 responseType: 'blob'
             });
@@ -75,7 +76,7 @@ export default function Preview({ user }) {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                `http://localhost:5000/api/ai/deployment-guide`,
+                `${API_BASE}/api/ai/deployment-guide`,
                 { portfolioId: id },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

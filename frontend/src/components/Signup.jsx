@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_BASE } from '../config';
 
 export default function Signup({ setUser }) {
     const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ export default function Signup({ setUser }) {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', {
+            const response = await axios.post(`${API_BASE}/api/auth/signup`, {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password

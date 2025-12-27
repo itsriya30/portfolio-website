@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { PlusCircle, RefreshCw, LogOut, Eye, Download, Share2 } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE } from '../config';
 
 export default function Dashboard({ user, setUser }) {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Dashboard({ user, setUser }) {
     const fetchPortfolios = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5000/api/portfolio/my-portfolios', {
+            const response = await axios.get(`${API_BASE}/api/portfolio/my-portfolios`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPortfolios(response.data);

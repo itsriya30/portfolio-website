@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RefreshCw, Loader, Link as LinkIcon } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE } from '../config';
 
 export default function RedesignPortfolio({ user }) {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function RedesignPortfolio({ user }) {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                'http://localhost:5000/api/ai/analyze-portfolio',
+                `${API_BASE}/api/ai/analyze-portfolio`,
                 { url: portfolioUrl },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -48,7 +49,7 @@ export default function RedesignPortfolio({ user }) {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                'http://localhost:5000/api/portfolio/redesign',
+                `${API_BASE}/api/portfolio/redesign`,
                 {
                     originalUrl: portfolioUrl,
                     analysisData,
